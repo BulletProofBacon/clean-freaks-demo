@@ -1,0 +1,258 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
+<title>Clean Freaks — Concept Demo</title>
+<style>
+:root{
+  --g:#178455;--g2:#2aa86c;--mint:#edf9f2;--mint2:#f7fcf9;
+  --ink:#142236;--muted:#6b7580;--line:#e4ebe7;--red:#c4322b;--amber:#b86b08;
+  --shadow:0 10px 30px rgba(18,70,45,.10)
+}
+*{box-sizing:border-box}
+html,body{margin:0;background:#eef4f0;color:var(--ink);font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif}
+button,input,select,textarea{font:inherit}
+button{cursor:pointer}
+.shell{max-width:520px;margin:auto;min-height:100vh;background:white;position:relative;padding-bottom:78px;box-shadow:0 0 35px rgba(0,0,0,.08)}
+header{position:sticky;top:0;z-index:20;background:rgba(255,255,255,.96);backdrop-filter:blur(10px);border-bottom:1px solid var(--line);padding:10px 14px}
+.brandrow{display:flex;align-items:center;gap:9px}
+.logo{width:38px;height:38px;border-radius:12px;background:var(--g);display:grid;place-items:center;color:#fff;font-weight:900;font-size:22px}
+.brand{font-weight:900;color:#146e48;letter-spacing:.3px}
+.brand small{display:block;color:#78827d;font-size:9px;margin-top:2px}
+.spacer{flex:1}
+.demo{font-size:9px;font-weight:900;background:#f0f3f1;border-radius:999px;padding:5px 7px}
+.iconbtn{border:1px solid var(--line);background:#fff;width:36px;height:36px;border-radius:11px;margin-left:5px;position:relative}
+.badge{position:absolute;right:-5px;top:-5px;background:#d62d20;color:#fff;border-radius:999px;font-size:9px;min-width:18px;height:18px;display:grid;place-items:center;border:2px solid #fff}
+main{padding:16px}
+.view{display:none}.view.active{display:block}
+h1{font-size:27px;line-height:1.06;margin:5px 0 8px;letter-spacing:-.6px}
+h2{font-size:18px;margin:22px 0 10px}
+p{margin:0;color:var(--muted);line-height:1.45}
+.hero{background:linear-gradient(135deg,#eaf8f0,#fbfdfb);border:1px solid #dcebe2;border-radius:23px;padding:20px;margin-bottom:14px;overflow:hidden}
+.hero h1{font-size:31px}
+.kicker{font-size:11px;color:var(--g);font-weight:900;letter-spacing:.8px}
+.heroart{margin:16px -20px -20px;height:165px;background:
+ linear-gradient(0deg,rgba(14,70,47,.22),rgba(14,70,47,.02)),
+ radial-gradient(circle at 20% 25%,#fff 0 9%,transparent 10%),
+ linear-gradient(145deg,#cce9d6,#f7fbf8 55%,#d8efe1);
+ position:relative}
+.heroart:after{content:"✨ CLEAN • BRIGHT • EASY";position:absolute;left:18px;bottom:18px;background:rgba(255,255,255,.9);padding:9px 12px;border-radius:12px;color:#176f4a;font-weight:900;font-size:12px}
+.btnrow{display:flex;gap:8px;margin-top:14px}
+.btn{border:0;border-radius:13px;padding:12px 14px;font-weight:850;background:var(--g);color:white;flex:1}
+.btn.secondary{background:white;color:var(--g);border:1px solid #b9d9c7}
+.btn.light{background:var(--mint);color:#146e48}
+.btn.red{background:#fff1ef;color:var(--red)}
+.trust{display:grid;grid-template-columns:repeat(4,1fr);gap:6px;margin:14px 0}
+.trust div{text-align:center;font-size:9px;font-weight:850;color:#526059}
+.trust b{display:block;font-size:19px;color:var(--g);margin-bottom:3px}
+.cards{display:grid;gap:10px}
+.card{border:1px solid var(--line);border-radius:17px;background:#fff;padding:14px;box-shadow:var(--shadow)}
+.service{display:flex;gap:12px;align-items:center}
+.thumb{width:82px;height:72px;border-radius:13px;background:linear-gradient(135deg,#d9eee1,#f7fbf8);display:grid;place-items:center;font-size:29px;flex:none}
+.name{font-weight:900}.sub{font-size:12px;color:var(--muted);margin-top:3px}
+.arrow{margin-left:auto;color:var(--g);font-size:22px}
+.steps{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+.step{border:1px solid var(--line);border-radius:15px;padding:12px 8px;text-align:center;font-size:10px;font-weight:800}
+.step b{display:grid;place-items:center;width:28px;height:28px;border-radius:50%;background:var(--mint);color:var(--g);margin:0 auto 7px}
+.cta{background:linear-gradient(135deg,#13794d,#27a167);color:#fff;border-radius:20px;padding:17px;margin-top:18px}
+.cta p{color:#def3e7}
+.nav{position:fixed;bottom:0;left:50%;transform:translateX(-50%);width:100%;max-width:520px;background:white;border-top:1px solid var(--line);display:grid;grid-template-columns:repeat(5,1fr);padding:6px 3px 8px;z-index:30}
+.nav button{border:0;background:none;color:#6e7873;font-size:9px;font-weight:850;padding:4px}
+.nav button.active{color:var(--g)}
+.nav span{display:block;font-size:20px;margin-bottom:1px}
+.formgrid{display:grid;gap:10px}
+.field label{display:block;font-size:11px;font-weight:900;margin-bottom:5px}
+.field input,.field select,.field textarea{width:100%;border:1px solid #dce5e0;border-radius:12px;padding:12px;background:#fff}
+.field textarea{min-height:90px}
+.progress{height:7px;background:#edf1ef;border-radius:99px;overflow:hidden;margin:8px 0 16px}.progress div{height:100%;background:var(--g);width:42%}
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:7px;margin:14px 0}
+.stat{border:1px solid var(--line);border-radius:14px;padding:10px 5px;text-align:center;background:#f8fbf9}
+.stat strong{display:block;font-size:22px;color:var(--g)}.stat span{font-size:9px;font-weight:850}
+.stat.warn{background:#fff2f0}.stat.warn strong{color:var(--red)}
+.job{display:flex;align-items:center;gap:9px}.time{width:55px;font-size:12px;font-weight:900}
+.avatar{width:38px;height:38px;border-radius:50%;background:var(--mint);color:var(--g);display:grid;place-items:center;font-size:11px;font-weight:900}
+.grow{flex:1}
+.pill{font-size:9px;font-weight:900;border-radius:999px;padding:5px 7px}
+.paid{background:#e7f7ed;color:#087844}.unpaid{background:#fff0ee;color:var(--red)}.due{background:#fff7e9;color:var(--amber)}
+.quick{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}
+.quick button{border:1px solid var(--line);background:#fff;border-radius:14px;padding:11px 5px;font-size:9px;font-weight:850}
+.quick b{display:block;font-size:21px;color:var(--g);margin-bottom:4px}
+.listrow{display:flex;align-items:center;gap:10px;padding:12px 0;border-bottom:1px solid var(--line)}
+.listrow:last-child{border-bottom:0}
+.money{background:linear-gradient(135deg,#127749,#2aa86c);border-radius:20px;padding:18px;color:#fff}
+.money p{color:#dff3e7}.money strong{font-size:31px;display:block;margin:3px 0}
+.portalhero{background:var(--mint2);border:1px solid #ddebe2;border-radius:20px;padding:17px}
+.tilegrid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:12px}
+.tile{border:1px solid var(--line);background:#fff;border-radius:15px;padding:14px 5px;font-size:9px;font-weight:850;position:relative}
+.tile b{display:block;font-size:22px;margin-bottom:5px;color:var(--g)}
+.toast{position:fixed;bottom:88px;left:50%;transform:translateX(-50%) translateY(15px);background:#18241d;color:#fff;border-radius:13px;padding:11px 15px;font-size:11px;font-weight:800;opacity:0;transition:.2s;z-index:99;max-width:90%;text-align:center}
+.toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+.modal{position:fixed;inset:0;background:rgba(10,20,15,.46);display:none;align-items:flex-end;justify-content:center;z-index:80}.modal.show{display:flex}
+.sheet{background:#fff;border-radius:24px 24px 0 0;width:100%;max-width:520px;padding:20px}
+.sheet h2{margin-top:0}
+.switcher{display:flex;gap:6px;padding:7px;background:#edf2ef;border-radius:14px;margin-bottom:15px}
+.switcher button{flex:1;border:0;background:transparent;border-radius:10px;padding:9px;font-size:10px;font-weight:850;color:#617068}
+.switcher button.on{background:#fff;color:var(--g);box-shadow:0 2px 7px rgba(0,0,0,.06)}
+.note{font-size:10px;background:#fff8de;border:1px solid #f0e2a9;border-radius:12px;padding:10px;color:#655729;margin:10px 0}
+</style>
+</head>
+<body>
+<div class="shell">
+<header>
+ <div class="brandrow">
+  <div class="logo">⌂</div>
+  <div class="brand">CLEAN FREAKS<small id="modeLabel">PUBLIC WEBSITE • CONCEPT DEMO</small></div>
+  <div class="spacer"></div>
+  <span class="demo">DEMO</span>
+  <button class="iconbtn" onclick="openModes()">☰</button>
+ </div>
+</header>
+
+<main>
+<section id="home" class="view active">
+ <div class="hero">
+  <div class="kicker">BUFFALO • WRIGHT COUNTY • WEST & NORTH METRO</div>
+  <h1>A cleaner home. More time for what matters.</h1>
+  <p>Professional residential and commercial cleaning with easy mobile booking.</p>
+  <div class="btnrow"><button class="btn" onclick="go('quote')">Get a Free Quote</button><button class="btn secondary" onclick="toast('Demo: Call / Text Kayla')">Call / Text</button></div>
+  <div class="heroart"></div>
+ </div>
+
+ <div class="trust">
+  <div><b>15+</b>Years Experience</div><div><b>✓</b>Background Checked</div><div><b>★</b>Local Business</div><div><b>♥</b>Woman Owned</div>
+ </div>
+
+ <h2>Cleaning Services</h2>
+ <div class="cards">
+  <div class="card service" onclick="toast('Recurring cleaning details')"><div class="thumb">🏠</div><div class="grow"><div class="name">Recurring Cleaning</div><div class="sub">Weekly, biweekly or monthly home cleaning.</div></div><div class="arrow">›</div></div>
+  <div class="card service" onclick="toast('Deep cleaning details')"><div class="thumb">✨</div><div class="grow"><div class="name">Deep Cleaning</div><div class="sub">A detailed reset for homes that need extra attention.</div></div><div class="arrow">›</div></div>
+  <div class="card service" onclick="toast('Move cleaning details')"><div class="thumb">📦</div><div class="grow"><div class="name">Move-In / Move-Out</div><div class="sub">Detailed cleaning before or after a move.</div></div><div class="arrow">›</div></div>
+ </div>
+
+ <h2>How It Works</h2>
+ <div class="steps"><div class="step"><b>1</b>Request Quote</div><div class="step"><b>2</b>Pick a Time</div><div class="step"><b>3</b>Enjoy Your Space</div></div>
+
+ <div class="cta"><strong>Ready for a cleaner, happier home?</strong><p>Try the mobile quote simulator.</p><button class="btn" style="margin-top:12px;background:#fff;color:#16774c" onclick="go('quote')">Start Quote</button></div>
+</section>
+
+<section id="quote" class="view">
+ <div class="kicker">FREE QUOTE</div><h1>Tell us about your space.</h1><p>This is a non-working demo form. No information is sent anywhere.</p>
+ <div class="progress"><div></div></div>
+ <div class="formgrid">
+  <div class="field"><label>What type of cleaning?</label><select><option>Standard / Recurring</option><option>Deep Cleaning</option><option>Move-In / Move-Out</option><option>Commercial / Airbnb</option></select></div>
+  <div class="field"><label>ZIP Code</label><input value="55313"></div>
+  <div class="field"><label>Approximate home size</label><select><option>1,000–1,500 sq ft</option><option>1,500–2,000 sq ft</option><option>2,000–2,500 sq ft</option><option>2,500+ sq ft</option></select></div>
+  <div class="field"><label>Bedrooms / Bathrooms</label><input value="3 bed • 2 bath"></div>
+  <div class="field"><label>Anything we should know?</label><textarea placeholder="Pets, special requests, areas needing extra attention..."></textarea></div>
+  <div class="field"><label>Photos</label><button class="btn light" onclick="toast('Demo: photo picker would open')">📷 Add Photos</button></div>
+  <button class="btn" onclick="submitQuote()">Continue Quote →</button>
+ </div>
+</section>
+
+<section id="admin" class="view">
+ <h1>Good morning, Kayla.</h1><p>Thursday • Demo operations dashboard</p>
+ <div class="stats">
+  <div class="stat"><strong id="quotes">3</strong><span>New Quotes</span></div>
+  <div class="stat warn"><strong id="unpaid">2</strong><span>Unpaid</span></div>
+  <div class="stat"><strong>1</strong><span>Messages</span></div>
+  <div class="stat"><strong>0</strong><span>Changes</span></div>
+ </div>
+ <h2>Today's Schedule</h2>
+ <div class="card">
+  <div class="job"><div class="time">9:00 AM</div><div class="avatar">SM</div><div class="grow"><div class="name">Sarah M.</div><div class="sub">Standard • Buffalo</div></div><span class="pill paid">PAID</span></div>
+  <div class="btnrow"><button class="btn secondary" onclick="toast('Demo: job details')">Details</button><button class="btn" onclick="toast('Job marked complete. Invoice workflow starts.')">Complete</button></div>
+ </div>
+ <div class="card">
+  <div class="job"><div class="time">11:00 AM</div><div class="avatar">JR</div><div class="grow"><div class="name">Jennifer R.</div><div class="sub">Deep Clean • St. Michael</div></div><span id="jStatus" class="pill unpaid">$185 UNPAID</span></div>
+  <div class="btnrow"><button class="btn red" onclick="toast('Friendly payment reminder sent')">Send Reminder</button><button class="btn secondary" onclick="payJennifer()">Mark Paid</button></div>
+ </div>
+ <div class="card">
+  <div class="job"><div class="time">2:00 PM</div><div class="avatar">MT</div><div class="grow"><div class="name">Mark T.</div><div class="sub">Standard • Monticello</div></div><span class="pill paid">PAID</span></div>
+ </div>
+ <h2>Quick Actions</h2>
+ <div class="quick">
+  <button onclick="go('customers')"><b>👥</b>Customers</button><button onclick="go('money')"><b>$</b>Invoices</button><button onclick="toast('Message center')"><b>✉</b>Messages</button><button onclick="toast('Reports dashboard')"><b>▥</b>Reports</button>
+ </div>
+ <h2>Customer View</h2><button class="btn" onclick="go('portal')">Preview Customer Portal</button>
+</section>
+
+<section id="customers" class="view">
+ <h1>Customers</h1><p>Schedule, notes, balances and history in one place.</p>
+ <div class="card" style="margin-top:14px">
+  <div class="listrow"><div class="avatar">SM</div><div class="grow"><div class="name">Sarah M.</div><div class="sub">Buffalo • Biweekly • $0 balance</div></div>›</div>
+  <div class="listrow"><div class="avatar">JR</div><div class="grow"><div class="name">Jennifer R.</div><div class="sub">St. Michael • Balance $185</div></div>›</div>
+  <div class="listrow"><div class="avatar">MT</div><div class="grow"><div class="name">Mark T.</div><div class="sub">Monticello • Monthly • $0 balance</div></div>›</div>
+  <div class="listrow"><div class="avatar">AP</div><div class="grow"><div class="name">Andrea P.</div><div class="sub">Buffalo • Weekly • $0 balance</div></div>›</div>
+ </div>
+</section>
+
+<section id="money" class="view">
+ <h1>Money</h1>
+ <div class="money"><p>Scheduled this week</p><strong>$1,240</strong><p>Demo numbers only</p></div>
+ <h2>Invoices</h2>
+ <div class="card"><div class="listrow"><div class="grow"><div class="name">Jennifer R.</div><div class="sub">Invoice #1042 • Deep Clean</div></div><span id="invoiceJ" class="pill unpaid">$185 OVERDUE</span></div><div class="btnrow"><button class="btn red" onclick="toast('Payment reminder sent')">Remind</button><button class="btn secondary" onclick="payJennifer()">Mark Paid</button></div></div>
+ <div class="card"><div class="listrow"><div class="grow"><div class="name">Danielle K.</div><div class="sub">Invoice #1040 • Standard</div></div><span class="pill due">$145 DUE</span></div></div>
+ <div class="card"><div class="listrow"><div class="grow"><div class="name">Sarah M.</div><div class="sub">Invoice #1039 • Standard</div></div><span class="pill paid">$145 PAID</span></div></div>
+</section>
+
+<section id="portal" class="view">
+ <div class="portalhero"><div class="kicker">CUSTOMER PORTAL</div><h1>Hi, Sarah!</h1><p>Your next cleaning is coming up.</p>
+  <div class="card" style="margin-top:13px"><div class="name">Thursday • 10:00 AM</div><div class="sub">Standard Cleaning • Buffalo</div><div class="btnrow"><button class="btn secondary" onclick="toast('Reschedule request started')">Reschedule</button><button class="btn light" onclick="toast('Skip request started')">Skip</button></div></div>
+ </div>
+ <div class="tilegrid">
+  <button class="tile" onclick="toast('Booking flow opened')"><b>📅</b>Book Cleaning</button>
+  <button class="tile" onclick="toast('Invoices opened')"><b>▤</b>Invoices</button>
+  <button class="tile" onclick="toast('Demo checkout: Venmo / PayPal / Card')"><b>💳</b>Pay</button>
+  <button class="tile" onclick="toast('Messages opened')"><b>💬</b>Messages</button>
+  <button class="tile" onclick="toast('Special request opened')"><b>✎</b>Requests</button>
+  <button class="tile" onclick="toast('Referral link copied')"><b>♡</b>Refer Friend</button>
+ </div>
+ <h2>Recent Activity</h2>
+ <div class="card"><div class="listrow"><div class="avatar">✓</div><div class="grow"><div class="name">Standard Cleaning</div><div class="sub">Aug 27 • Paid • $145</div></div>›</div><div class="listrow"><div class="avatar">✓</div><div class="grow"><div class="name">Standard Cleaning</div><div class="sub">Aug 13 • Paid • $145</div></div>›</div></div>
+</section>
+</main>
+
+<nav class="nav">
+ <button data-go="home" class="active" onclick="go('home')"><span>⌂</span>Home</button>
+ <button data-go="quote" onclick="go('quote')"><span>＋</span>Quote</button>
+ <button data-go="admin" onclick="go('admin')"><span>▦</span>Admin</button>
+ <button data-go="portal" onclick="go('portal')"><span>♙</span>Customer</button>
+ <button onclick="openModes()"><span>•••</span>Views</button>
+</nav>
+</div>
+
+<div class="modal" id="modal" onclick="if(event.target===this)closeModes()">
+ <div class="sheet">
+  <h2>Concept Demo Views</h2>
+  <p>Jump between the public site and the two private experiences.</p>
+  <div class="note">Everything here is fake demo data. No real booking, payment or customer information is connected.</div>
+  <button class="btn" style="width:100%;margin-top:8px" onclick="go('home');closeModes()">Public Website</button>
+  <button class="btn secondary" style="width:100%;margin-top:8px" onclick="go('admin');closeModes()">Kayla's Admin Dashboard</button>
+  <button class="btn light" style="width:100%;margin-top:8px" onclick="go('portal');closeModes()">Recurring Customer Portal</button>
+  <button class="btn secondary" style="width:100%;margin-top:8px" onclick="closeModes()">Close</button>
+ </div>
+</div>
+<div class="toast" id="toast"></div>
+
+<script>
+let jPaid=false;
+function go(id){
+ document.querySelectorAll('.view').forEach(v=>v.classList.remove('active'));
+ document.getElementById(id).classList.add('active');
+ document.querySelectorAll('.nav button[data-go]').forEach(b=>b.classList.toggle('active',b.dataset.go===id));
+ let labels={home:'PUBLIC WEBSITE • CONCEPT DEMO',quote:'QUOTE FLOW • CONCEPT DEMO',admin:'ADMIN • CONCEPT DEMO',customers:'ADMIN • CUSTOMERS',money:'ADMIN • MONEY',portal:'CUSTOMER PORTAL • CONCEPT DEMO'};
+ document.getElementById('modeLabel').textContent=labels[id]||'CONCEPT DEMO';
+ window.scrollTo(0,0);
+}
+function toast(msg){let t=document.getElementById('toast');t.textContent=msg;t.classList.add('show');setTimeout(()=>t.classList.remove('show'),1800)}
+function submitQuote(){toast('Quote submitted — Kayla would get a notification');setTimeout(()=>go('home'),900)}
+function payJennifer(){
+ if(!jPaid){jPaid=true;document.getElementById('unpaid').textContent='1';document.getElementById('jStatus').textContent='PAID $185';document.getElementById('jStatus').className='pill paid';document.getElementById('invoiceJ').textContent='PAID $185';document.getElementById('invoiceJ').className='pill paid'}
+ toast('Marked paid — automatic reminders stopped');
+}
+function openModes(){document.getElementById('modal').classList.add('show')}
+function closeModes(){document.getElementById('modal').classList.remove('show')}
+</script>
+</body>
+  </html>
